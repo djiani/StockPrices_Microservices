@@ -2,8 +2,8 @@ spring:
  application:
   name: eureka-service
 
-#server:
-# port: 8301
+server:
+ port: 8761
 
 eureka:
  client:
