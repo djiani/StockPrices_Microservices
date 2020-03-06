@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,16 @@ public class DBServiceResource {
 		
 		return getQuotesByUserName(quotes.getUserName());
 	}
+	
+	@DeleteMapping("/delete/{username}")
+	public List<String> delete(@PathVariable("username") final String username) {
+		List<Quote> quotes = quotesRespoistory.findByUserName(username);
+	
+		quotesRespoistory.deleteAll(quotes);
+		
+		return getQuotesByUserName(username);
+	}
+	
 	
 	private List<String> getQuotesByUserName(final String username) {
 		return quotesRespoistory.findByUserName(username)
