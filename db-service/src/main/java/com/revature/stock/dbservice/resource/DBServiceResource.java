@@ -3,6 +3,7 @@ package com.revature.stock.dbservice.resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.stock.dbservice.model.Quote;
+import com.revature.stock.dbservice.model.Quotes;
 import com.revature.stock.dbservice.repository.QuotesRepository;
 
 @RestController
 @RequestMapping("/rest/db")
 public class DBServiceResource {
+	
+	@Autowired
 	private QuotesRepository quotesRespoistory;
 
 	@GetMapping("/{username}")
@@ -28,7 +32,7 @@ public class DBServiceResource {
 	}
 
 	@PostMapping("/add")
-	public List<String> add(@RequestBody final Quote quotes){
+	public List<String> add(@RequestBody final Quotes quotes){
 		
 		return null;
 	}
