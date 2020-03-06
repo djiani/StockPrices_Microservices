@@ -29,6 +29,12 @@ public class Quote {
 		this.quote = quote;
 	}
 
+	public Quote( String userName, String quote) {
+		super();
+		this.userName = userName;
+		this.quote = quote;
+	}
+	
 	public Quote() {
 	}
 

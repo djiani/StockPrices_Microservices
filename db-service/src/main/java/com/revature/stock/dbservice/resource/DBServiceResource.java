@@ -25,15 +25,28 @@ public class DBServiceResource {
 	@GetMapping("/{username}")
 	public List<String> getQuotes(@PathVariable final String username){
 		
-		return quotesRespoistory.findByUserName(username)
-			.stream()
-			.map(Quote::getQuote)   //nice way to map collection
-			.collect(Collectors.toList());
+		return getQuotesByUserName(username);
 	}
+
+	
 
 	@PostMapping("/add")
 	public List<String> add(@RequestBody final Quotes quotes){
 		
-		return null;
+		quotes.getQuotes()
+		.stream()
+		.map(quote -> new Quote(quotes.getUserName(), quote) )
+		.forEach(quote -> {
+			quotesRespoistory.save(quote);
+			});
+		
+		return getQuotesByUserName(quotes.getUserName());
+	}
+	
+	private List<String> getQuotesByUserName(final String username) {
+		return quotesRespoistory.findByUserName(username)
+			.stream()
+			.map(Quote::getQuote)   //nice way to map collection
+			.collect(Collectors.toList());
 	}
 }
